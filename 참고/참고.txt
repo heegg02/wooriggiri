@@ -1,0 +1,15 @@
+DB게시판 구조 설계
+https://blog.naver.com/pjt3591oo/223193892552
+
+대댓글 구현
+https://velog.io/@hhss2259/%EB%8C%80%EB%8C%93%EA%B8%80-%EB%8C%93%EA%B8%80%EC%9D%98-%EB%8C%93%EA%B8%80-%EA%B8%B0%EB%8A%A5-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0
+
+vscode java spring react
+https://1nnovator.tistory.com/47
+https://lemontia.tistory.com/912
+
+코딩애플 react
+https://codingapple.com/unit/react2-jsx-classname-html/?id=2305
+
+회원가입 이메일 인증
+https://velog.io/@kjh950330/%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85-%EC%9D%B4%EB%A9%94%EC%9D%BC-%EC%9D%B8%EC%A6%9D-%EA%B8%B0%EB%8A%A5-%EA%B5%AC%ED%98%84
