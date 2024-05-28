@@ -2,14 +2,14 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.css';
 
-import Main from './main/Main.js'
-import Login from './main/Login.js'
-import Settings from './main/Settings.js'
-import Community from './main/Community.js'
-import User from './main/User.js'
-import Post from './main/Post.js'
-import CreatePost from './main/CreatePost.js'
-import NotFound from './main/NotFound.js'
+import Main from './pages/Main'
+import Login from './pages/Login'
+import Settings from './pages/Settings'
+import Community from './pages/Community'
+import User from './pages/User'
+import Post from './pages/Post'
+import CreatePost from './pages/CreatePost'
+import NotFound from './pages/NotFound'
 
 function App() {
   return (

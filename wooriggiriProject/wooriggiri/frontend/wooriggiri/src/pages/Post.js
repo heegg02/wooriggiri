@@ -16,7 +16,7 @@ function Post() {
         );
     }
 
-    return null; // 모든 조건에 해당하지 않을 때
+    return null;
 }
 
 export default Post;
