@@ -1,0 +1,8 @@
+.header_item {
+    align-self: center;
+}
+
+.header_item.end {
+    padding: 5px;
+    margin-right: 20px;
+}
