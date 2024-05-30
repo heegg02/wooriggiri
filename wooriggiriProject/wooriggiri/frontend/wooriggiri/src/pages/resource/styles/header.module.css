@@ -1,0 +1,15 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 40px;
+    padding-right: 40px;
+    border-bottom: 0.4px solid #A4A3A4;
+}
+
+.header_item {
+    align-self: center;
+}
+
+.chatbot_btn {
+    border: 0.4px solid #A4A3A4;
+}

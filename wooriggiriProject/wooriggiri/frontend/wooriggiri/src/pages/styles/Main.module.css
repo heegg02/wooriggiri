@@ -1,39 +1,31 @@
-* {
-    box-sizing: border-box;
-}
-
-i {
-    transition: 0.4s ease;
-    color :black;
-    font-size: 1.5rem;
-}
 .container {
     display: grid;
     grid-template-areas: 
         "sidebar header"
-        "sidebar a";
+        "sidebar mainContent";
     grid-template-rows: 5vh auto;
     height: 100vh;
     transition: 0.4s ease;
 }
-
+.container.expended {
+    grid-template-columns: 280px auto;
+}
 .container.collapsed {
     grid-template-columns: 0 auto;
 }
 
-.container.expended {
-    grid-template-columns: 280px auto;
+.header {
+    grid-area: header;
 }
 
-.header {
-    transition: 0.4s ease;
-    grid-area: header;
-    display: flex;
-    height: 100%;
-    width: auto;
-    padding-left : 20px;
-    border-bottom: 0.5px solid #8f8f8f;
+.sidebar {
+    grid-area: sidebar;
 }
+
+.mainContent {
+    grid-area: mainContent;
+}
+/*
 
 .header_item {
     width: 100%;
@@ -65,12 +57,7 @@ i {
     opacity: 0;
 }
 
-.sidebar {
-    transition: 0.4s ease;
-    grid-area: sidebar;
-    height: 100vh;
-    display: flex;
-}
+
 
 .sidebar_container {
     padding: 20px;
@@ -91,7 +78,7 @@ i {
 }
 
 .sidebar_container.collapsed {  
-    height: 90vh;
+    height: 80vh;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
@@ -109,4 +96,4 @@ i {
 
 .sidebar_header_item.btn {
     justify-self: end;
-}
+} */

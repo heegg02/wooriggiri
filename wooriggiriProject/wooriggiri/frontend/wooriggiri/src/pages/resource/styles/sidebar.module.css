@@ -1,0 +1,32 @@
+.sidebar {
+    display: flex;
+}
+.sidebar_box {
+    align-self: center;
+    width: 280px;
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    transition: 0.3s ease;
+}
+.sidebar_box.expended {
+    height: 100%;
+    border-right: 0.4px solid #A4A3A4;
+}
+.sidebar_box.collapsed {
+    position: fixed;
+    height: 85%;
+    border-radius: 0 20px 20px 0;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.sidebar_box_item {
+}
+
+.sidebar_box_header {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
