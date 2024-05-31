@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
+import MyInfo from './MyInfo.js'
 import styles from './styles/sidebar.module.css'
 
 function Sidebar({ className, toggleSidebar, isSidebarExpanded }) {
@@ -19,7 +20,6 @@ function Sidebar({ className, toggleSidebar, isSidebarExpanded }) {
         }
     });
 
-    const [isMouseEntered, setIsMouseEntered] = useState(isSidebarExpanded);
     const sidebar_boxRef = useRef();
 
 
@@ -28,12 +28,10 @@ function Sidebar({ className, toggleSidebar, isSidebarExpanded }) {
         const sidebar_box = sidebar_boxRef.current;
 
         const handleMouseEnter = () => {
-            setIsMouseEntered(true);
             sidebar_box.style.transform = 'translateX(0px)';
             sidebar_box.style.opacity = '1';
         }
         const handleMouseLeave = () => {
-            setIsMouseEntered(false);
             sidebar_box.style.transform = 'translateX(-260px)';
             sidebar_box.style.opacity = '0';
         }
@@ -55,17 +53,21 @@ function Sidebar({ className, toggleSidebar, isSidebarExpanded }) {
     return (
         <div className={`${ className } ${styles.sidebar}`}>
             <div ref={ sidebar_boxRef } className={`${styles.sidebar_box} ${isSidebarExpanded ? styles.expended : styles.collapsed}`}>
-                <div className={`${styles.sidebar_box_item}`}>
+                <div>
                     <div className={`${styles.sidebar_box_header}`}>
                         <div className={`${styles.sidebar_box_header_item}`}>
-                            <i className='bi bi-menu-up'> Menu</i>
+                            <i className='bi bi-menu-up'/>
+                            Menu
                         </div>
                         <div ref={ buttonRef } className={`${styles.sidebar_box_header_item}`}>
-                            <i className={ isSidebarExpanded ? 'bi bi-chevron-double-left' : 'bi bi-chevron-double-right' }></i>
+                            <i className={`bi ${isSidebarExpanded ? 'bi-chevron-double-left' : 'bi-chevron-double-right'}`}></i>
                         </div>
                     </div>
                 </div>
-                <div className={`${styles.sidebar_box_item}`}>aa</div>
+                <div className={`${styles.sidebar_box_list}`}>
+                    <MyInfo/>
+                    <div className={`${styles.sidebar_box_list_item}`}>aa</div>
+                </div>
             </div>
         </div>
     );

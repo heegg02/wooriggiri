@@ -14,8 +14,14 @@ https://codingapple.com/unit/react2-jsx-classname-html/?id=2305
 리액트 개발 참고
 https://velog.io/@gaebar_top/React-%EC%9B%B9-%EA%B0%9C%EB%B0%9C-1
 
+리액트 kakaoFE react children과 친해지기
+https://fe-developers.kakaoent.com/2021/211022-react-children-tip/
+
 리액트 route 사용
 https://goddaehee.tistory.com/305
+
+리액트 route v6 사용 신규 명령어
+https://juyami.tistory.com/31
 
 리액트 route 중첩
 https://velog.io/@reasonz/2022.07.14-%EB%A6%AC%EC%95%A1%ED%8A%B8-%EB%9D%BC%EC%9A%B0%ED%84%B0-%EC%A4%91%EC%B2%A9-%EB%9D%BC%EC%9A%B0%ED%8C%85-nested-routes-outlet
@@ -25,6 +31,9 @@ https://mjn5027.tistory.com/29
 
 리액트 동적 routing
 https://velog.io/@kykim_dev/React-Dynamic-Routing-Path-Parameter
+
+회원가입 자동입력 방지
+https://precious-value.tistory.com/14
 
 회원가입 이메일 인증
 https://velog.io/@kjh950330/%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85-%EC%9D%B4%EB%A9%94%EC%9D%BC-%EC%9D%B8%EC%A6%9D-%EA%B8%B0%EB%8A%A5-%EA%B5%AC%ED%98%84
@@ -38,6 +47,9 @@ https://velog.io/@jihukimme/React-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EB%A1%9C
 
 리액트 Context API
 https://velog.io/@ckstn0777/Context-API%EC%9D%98-%EC%B5%9C%EB%8C%80-%EB%8B%A8%EC%A0%90%EC%9D%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C
+
+리액트 Context API로 전역 로그인
+https://zubetcha.tistory.com/entry/React-Context-API%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EC%97%AC-%EC%A0%84%EC%97%AD%EC%97%90%EC%84%9C-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EC%83%81%ED%83%9C-%EA%B4%80%EB%A6%AC-%EB%B0%8F-%EA%B5%AC%EB%8F%85%ED%95%98%EA%B8%B0
 
 css 모서리 모서리 라운드
 https://hianna.tistory.com/500

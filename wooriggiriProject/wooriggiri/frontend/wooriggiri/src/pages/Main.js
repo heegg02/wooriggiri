@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
-import Header from './resource/Header.js'
-import Sidebar from './resource/Sidebar.js'
-import MainContent from './resource/MainContent.js'
+import React, { useState } from 'react';
+import Header from '../components/Header.js'
+import Sidebar from '../components/Sidebar.js'
+import MainContent from '../components/MainContent.js'
 import styles from './styles/Main.module.css';
 import 'bootstrap-icons/font/bootstrap-icons.css'
 
-function Main() {
+function Main({  }) {
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
 
     const toggleSidebar = () => {
