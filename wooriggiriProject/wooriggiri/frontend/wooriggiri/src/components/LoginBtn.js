@@ -11,7 +11,7 @@ function LoginBtn() {
 
     return (
         <button onClick={ goToLogin } className={`${styles.btn}`}>
-            <i className="bi bi-person-circle"/>aaa
+            <i className="bi bi-person-circle"/>로그인
         </button>
     );
 }

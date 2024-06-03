@@ -8,16 +8,17 @@ function LoginForm({ signUpClick }) {
             <h3>로그인</h3>
             <form>
                 <div className={styles.input_group}>
-                    <label htmlFor="username">Id</label>
-                    <input type="text" placeholder="아이디" id="username" name="username" required />
+                    <label htmlFor="email">Email</label>
+                    <input type="email" placeholder="이메일" id="email" name="email" required />
                 </div>
                 <div className={styles.input_group}>
                     <label htmlFor="password">Password</label>
                     <input type="password" placeholder="비밀번호" id="password" name="password" required />
                 </div>
-                <button className={styles.btn} type="submit">Login</button>
+                <button className={styles.btn} type="submit">로그인</button>
             </form>
-            <button className={styles.btn_signUp}><Link to="signup">회원 가입</Link></button>
+            <Link to="/Login/SignUp"><button className={styles.btn_signUp}>회원 가입</button></Link>
+            
         </>
     );
 } 

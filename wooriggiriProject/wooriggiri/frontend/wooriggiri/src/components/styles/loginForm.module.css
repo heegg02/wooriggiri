@@ -1,6 +1,7 @@
 .input_group {
     margin-bottom: 15px;
     text-align: left;
+    width: 250px;
 }
   
 .input_group label {
