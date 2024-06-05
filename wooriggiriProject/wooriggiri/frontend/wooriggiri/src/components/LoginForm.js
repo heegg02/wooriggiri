@@ -6,31 +6,30 @@ import styles from './styles/loginForm.module.css'
 function LoginForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setError('');
-    
-        try {
-          const response = await axios.post('http://localhost:8080/login', {
-            email,
-            password,
-          }, {
-            headers: {
-              'Content-Type': 'application/json',
-            },
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+      
+      const LoginUser = {
+          email: email,
+          password: password
+      }
+      try {
+          const response = await axios.post('http://localhost:8080/api/login', LoginUser, {
+              headers: {
+                  'Content-Type': 'application/json'
+              }
           });
-    
+      
           if (response.status === 200) {
-            
-            window.location.href = '/';
+              console.log('Login successful:', response.data);
+          } else {
+              console.error('Error:', response.status);
           }
-        } catch (err) {
-          setError('로그인 실패. 사용자 이름과 비밀번호를 확인하세요.');
-          console.log(error);
-        }
-      };
+      } catch (error) {
+          alert('An error occurred:', error);
+      }
+  };
 
     return (
         <>
@@ -60,8 +59,7 @@ function LoginForm() {
                 </div>
                 <button className={styles.btn} type="submit">로그인</button>
             </form>
-            <Link to="/Login/SignUp"><button className={styles.btn_signUp}>회원 가입</button></Link>
-            
+            <Link to="/login/signup"><button className={styles.btn_signUp}>회원 가입</button></Link>
         </>
     );
 } 
