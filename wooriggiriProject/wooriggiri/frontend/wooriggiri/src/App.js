@@ -5,27 +5,22 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 
 import Main from './pages/Main'
 import Login from './pages/Login'
-import Settings from './pages/Settings'
-import Community from './pages/Community'
-import User from './pages/User'
-import Post from './pages/Post'
-import CreatePost from './pages/CreatePost'
 import NotFound from './pages/NotFound'
 
+import { AuthProvider } from './contexts/AuthContext.js';
+
 function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route exact path="/" element={<Main/>}></Route>
-        <Route exact path="/login/*" element={<Login/>}></Route>
-        <Route exact path="/settings/*" element={<Settings/>}></Route>
-        <Route exact path="/community/*" element={<CreatePost/>}></Route>
-        <Route exact path="/user/*" element={<CreatePost/>}></Route>
-        <Route exact path="/createPost/*" element={<CreatePost/>}></Route>
-        <Route exact path="*" element={<NotFound/>}></Route>
-      </Routes>
-    </BrowserRouter>
-  );
+    return (
+        <BrowserRouter>
+            <AuthProvider>
+                <Routes>
+                    <Route exact path="/" element={<Main/>}></Route>
+                    <Route exact path="/login/*" element={<Login/>}></Route>
+                    <Route exact path="*" element={<NotFound/>}></Route>
+                </Routes>
+            </AuthProvider>
+        </BrowserRouter>
+    );
 }
 
 export default App;

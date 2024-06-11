@@ -1,31 +1,40 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './styles/loginForm.module.css'
+import { useAuth } from '../contexts/AuthContext.js';
 
 function LoginForm() {
-    const [email, setEmail] = useState('');
+    const navigate = useNavigate();
+    const { login } = useAuth();
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     const handleSubmit = async (event) => {
-      event.preventDefault();
-      
-      const LoginUser = {
-          email: email,
-          password: password
-      }
-      try {
-          const response = await axios.post('http://localhost:8080/api/login', LoginUser, {
-              headers: {
-                  'Content-Type': 'application/json'
-              }
-          });
-      
-          if (response.status === 200) {
-              console.log('Login successful:', response.data);
-          } else {
-              console.error('Error:', response.status);
-          }
+        event.preventDefault();
+        
+        try {
+            const response = await axios.post('http://localhost:8080/auth/login', 
+            {
+                username: username,
+                password: password
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        
+            if (response.status === 200) {
+                const accessToken = response.headers['accesstoken'];
+                const refreshToken = response.headers['refreshtoken'];
+
+                login(accessToken, refreshToken);
+
+                navigate('/');
+            } else {
+                console.error('Error:', response.status);
+            }
       } catch (error) {
           alert('An error occurred:', error);
       }
@@ -36,16 +45,17 @@ function LoginForm() {
             <h3>로그인</h3>
             <form onSubmit={ handleSubmit }>
                 <div className={styles.input_group}>
-                    <label htmlFor="email">Email</label>
+                    <label htmlFor="username">Id / User Name</label>
                     <input
-                        type="email"
-                        placeholder="이메일"
-                        id="email"
-                        name="email"
-                        onChange={(e) => setEmail(e.target.value)}
+                        type="text"
+                        placeholder="아이디"
+                        id="username"
+                        name="username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
                         required
                     />
-                </div>
+                    </div>
                 <div className={styles.input_group}>
                     <label htmlFor="password">Password</label>
                     <input

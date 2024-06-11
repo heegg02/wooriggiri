@@ -4,7 +4,7 @@ import Sidebar from '../components/Sidebar.js'
 import MainContent from '../components/MainContent.js'
 import styles from './styles/Main.module.css';
 
-function Main({  }) {
+function Main() {
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
 
     const toggleSidebar = () => {

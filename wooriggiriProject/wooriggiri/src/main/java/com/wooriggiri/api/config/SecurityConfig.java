@@ -1,16 +1,28 @@
 package com.wooriggiri.api.config;
 
+import com.wooriggiri.api.filter.JwtAuthenticationFilter;
+
+import jakarta.servlet.http.HttpServletResponse;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter) {
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -20,12 +32,27 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(csrf -> csrf.disable()) // CSRF 보호 비활성화
+            .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/api/signup", "/api/login").permitAll() // /api/signup 엔드포인트에 대한 접근 허용
-                .anyRequest().authenticated() // 나머지 요청은 인증 필요
+                .requestMatchers("/auth/*").permitAll()
+                .anyRequest().authenticated()
             )
-            .formLogin(formLogin -> formLogin.disable()); // 폼 로그인 비활성화
+            .formLogin(formLogin -> formLogin
+                .loginPage("http://localhost:3000/login")
+                .permitAll()
+            )
+            .logout(logout -> logout
+                .logoutUrl("/perform_logout")
+                .deleteCookies("refreshToken", "JSESSIONID")
+                .logoutSuccessHandler((request, response, authentication) -> {
+                    response.setStatus(HttpServletResponse.SC_OK);
+                })
+                .permitAll()
+            )
+            .sessionManagement(session -> session
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            )
+            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
