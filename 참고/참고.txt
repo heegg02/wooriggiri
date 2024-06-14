@@ -75,7 +75,8 @@ https://ivorycode.tistory.com/entry/%EC%9D%B8%EC%A6%9DAuthentication%EA%B3%BC-%E
 spring으로 OAuth 만들기
 https://brunch.co.kr/@sbcoba/1
 
-
+JSTL 및 EL 사용법
+https://m.blog.naver.com/hj_kim97/222934482976
 
 혹시나
 git remote add orign 너 깃헙 주소
