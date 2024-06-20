@@ -67,7 +67,7 @@ function LoginForm() {
                 </div>
                 <button className={styles.btn} type="submit">로그인</button>
             </form>
-            <Link to="/login/signup"><button className={styles.btn_signUp}>회원 가입</button></Link>
+            <Link to="/signup"><button className={styles.btn_signUp}>회원 가입</button></Link>
         </>
     );
 } 

@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './styles/header.module.css'
-import MainLogo from './MainLogo.js'
+import MainLogo from '../components/MainLogo.js'
 
 
 function Header({ className }) {

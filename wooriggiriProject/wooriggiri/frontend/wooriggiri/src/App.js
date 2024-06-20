@@ -3,10 +3,12 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
-import Community from './components/Community.js';
-import MainContent from './components/MainContent.js';
+import Community from './content/Community.js';
+import MainContent from './content/MainContent.js';
 import MainLayout from './pages/MainLayout.js'
-import Login from './pages/Login'
+import Login from './login/Login.js'
+import LoginForm from './login/LoginForm.js';
+import SignUpForm from './login/SignUpForm.js';
 import NotFound from './pages/NotFound'
 
 import { AuthProvider } from './contexts/AuthContext.js';
@@ -17,9 +19,10 @@ function App() {
             <AuthProvider>
                 <Routes>
                     <Route path="/" element={<MainLayout><MainContent/></MainLayout>}></Route>
-                    <Route path="/login/*" element={<Login/>}></Route>
-                    <Route path="/community/*">
-                        <Route path="" element={<MainLayout><Community/></MainLayout>}></Route> 
+                    <Route path="/login" element={<Login><LoginForm/></Login>}></Route>
+                    <Route path="/signup" element={<Login><SignUpForm/></Login>}></Route>
+                    <Route path="/community/:communityName">
+                        <Route path="" element={<MainLayout><Community/></MainLayout>}></Route>
                     </Route>
                     <Route path="*" element={<NotFound/>}></Route>
                 </Routes>

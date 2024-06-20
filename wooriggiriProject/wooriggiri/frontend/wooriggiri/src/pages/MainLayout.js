@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Header from '../components/Header.js'
-import Sidebar from '../components/Sidebar.js'
-import Content from '../components/Content.js'
+import Header from '../header/Header.js'
+import Sidebar from '../sidebar/Sidebar.js'
+import Content from '../content/Content.js'
 import styles from './styles/Main.module.css';
 
 function Main( { children } ) {
