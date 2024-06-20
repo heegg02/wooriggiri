@@ -1,12 +1,11 @@
 import React from 'react';
-import styles from './styles/content.module.css';
 
-function MainCotent({className}) {
+function MainContent() {
     return (
-        <div className={className}>
-            content입니다.
+        <div>
+            MainContent입니다.
         </div>
     );
 } 
 
-export default MainCotent;
+export default MainContent;

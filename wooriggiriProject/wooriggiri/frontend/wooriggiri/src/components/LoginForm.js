@@ -27,10 +27,8 @@ function LoginForm() {
         
             if (response.status === 200) {
                 const accessToken = response.headers['accesstoken'];
-                const refreshToken = response.headers['refreshtoken'];
 
-                login(accessToken, refreshToken);
-
+                login(accessToken);
                 navigate('/');
             } else {
                 console.error('Error:', response.status);
@@ -55,7 +53,7 @@ function LoginForm() {
                         onChange={(e) => setUsername(e.target.value)}
                         required
                     />
-                    </div>
+                </div>
                 <div className={styles.input_group}>
                     <label htmlFor="password">Password</label>
                     <input

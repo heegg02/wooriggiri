@@ -14,6 +14,10 @@
     padding: 8px;
     box-sizing: border-box;
 }
+
+.input_group button {
+    width: 75px;
+}
   
 .btn {
     transition: 0.1s ease;
@@ -44,4 +48,7 @@
     color: #eeeeee;
     background-color: #727272;
 
+}
+.input_id_container {
+    display: flex;
 }

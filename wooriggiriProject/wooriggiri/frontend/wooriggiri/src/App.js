@@ -3,7 +3,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
-import Main from './pages/Main'
+import Community from './components/Community.js';
+import MainContent from './components/MainContent.js';
+import MainLayout from './pages/MainLayout.js'
 import Login from './pages/Login'
 import NotFound from './pages/NotFound'
 
@@ -14,9 +16,12 @@ function App() {
         <BrowserRouter>
             <AuthProvider>
                 <Routes>
-                    <Route exact path="/" element={<Main/>}></Route>
-                    <Route exact path="/login/*" element={<Login/>}></Route>
-                    <Route exact path="*" element={<NotFound/>}></Route>
+                    <Route path="/" element={<MainLayout><MainContent/></MainLayout>}></Route>
+                    <Route path="/login/*" element={<Login/>}></Route>
+                    <Route path="/community/*">
+                        <Route path="" element={<MainLayout><Community/></MainLayout>}></Route> 
+                    </Route>
+                    <Route path="*" element={<NotFound/>}></Route>
                 </Routes>
             </AuthProvider>
         </BrowserRouter>

@@ -4,6 +4,7 @@ import axios from 'axios';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+    const [loginStatus, setLoginStatus] = useState(true);
 
     const login = async (accessToken, refreshToken) => {
         console.log("얍")

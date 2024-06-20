@@ -22,7 +22,7 @@
     grid-area: sidebar;
 }
 
-.mainContent {
+.content {
     grid-area: mainContent;
 }
 /*

@@ -21,9 +21,7 @@ function Sidebar({ className, toggleSidebar, isSidebarExpanded }) {
     });
 
     const sidebar_boxRef = useRef();
-
-
-
+    
     useEffect(() => {
         const sidebar_box = sidebar_boxRef.current;
 

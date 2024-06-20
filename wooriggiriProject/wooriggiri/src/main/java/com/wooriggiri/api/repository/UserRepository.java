@@ -1,11 +1,15 @@
 package com.wooriggiri.api.repository;
 
-import com.wooriggiri.api.model.User;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 
+public class UserRepository {
 
-@Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-    User findByUsername(String username);
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    public void saveUser(String username, String password, String email) {
+        jdbcTemplate.update("INSERT INTO user (username, password, email) VALUES (?, ?, ?)",
+                            username, password, email);
+    }
 }
