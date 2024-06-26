@@ -1,15 +1,12 @@
 import React from "react";
 import { useNavigate  } from 'react-router-dom';
 import styles from './styles/loginBtn.module.css'
-import { useAuth } from '../contexts/AuthContext.js';
 
 function LoginBtn() {
     const navigate = useNavigate ();
-    const { loginStatus, login } = useAuth();
     
     const goToLogin = () => {
-        login();
-        // navigate('/login');
+        navigate('/login');
     }
     
     return (

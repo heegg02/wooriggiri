@@ -1,8 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import MyInfo from './MyInfo.js'
+import SidebarItem from './SidebarItem.js'
 import styles from './styles/sidebar.module.css'
+import { useAuth } from '../contexts/AuthContext.js';
 
 function Sidebar({ className, toggleSidebar, isSidebarExpanded }) {
+    const { loginStatus } = useAuth();
     const buttonRef = useRef();
 
     useEffect(() => {
@@ -64,7 +67,7 @@ function Sidebar({ className, toggleSidebar, isSidebarExpanded }) {
                 </div>
                 <div className={`${styles.sidebar_box_list}`}>
                     <MyInfo/>
-                    <div className={`${styles.sidebar_box_list_item}`}>aa</div>
+                    { loginStatus ? <SidebarItem/> : ''}
                 </div>
             </div>
         </div>

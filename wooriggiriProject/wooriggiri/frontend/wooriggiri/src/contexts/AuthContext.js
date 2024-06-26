@@ -1,43 +1,24 @@
 import React, { createContext, useContext, useState } from 'react';
-import axios from 'axios';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+    const [userProfile, setUserProfile] = useState(null);
     const [loginStatus, setLoginStatus] = useState(false);
 
-    const login = () => {
+    const login = (user) => {
+        setUserProfile(user);
         setLoginStatus(true);
-    }
+    };
 
     const logout = () => {
+        localStorage.removeItem('accessToken');
         setLoginStatus(false);
-    }
-    // const login = async (accessToken, refreshToken) => {
-    //     console.log("얍")
-    //     const response = await axios.get('http://localhost:8080/test/test', {
-    //         withCredentials: true
-    //     });
-    //     console.log(response);
-    //     sessionStorage.setItem('accessToken', accessToken);
-    //     document.cookie = refreshToken
-    // };
-
-    // const logout = async () => {
-    //     try {
-    //         sessionStorage.removeItem('accessToken');
-    
-    //         const response = await axios.get('http://localhost:8080/auth/logout', {
-    //         });
-    
-    //         console.log('Logout successful:', response.data);
-    //     } catch (error) {
-    //         console.error('Error during logout:', error);
-    //     }
-    // };
+        setUserProfile(null);
+    };
 
     return (
-        <AuthContext.Provider value={{ login, logout, loginStatus, setLoginStatus }}>
+        <AuthContext.Provider value={{ login, logout, loginStatus, userProfile, setUserProfile, setLoginStatus }}>
             {children}
         </AuthContext.Provider>
     );

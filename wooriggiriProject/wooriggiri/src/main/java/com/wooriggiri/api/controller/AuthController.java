@@ -1,32 +1,96 @@
 package com.wooriggiri.api.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.wooriggiri.api.dto.UserDto;
+import com.wooriggiri.api.model.LoginDto;
+import com.wooriggiri.api.model.User;
+import com.wooriggiri.api.model.UserDto;
+import com.wooriggiri.api.model.UsernameRequest;
 import com.wooriggiri.api.service.UserService;
+import com.wooriggiri.api.util.JwtUtil;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import jakarta.servlet.http.HttpServletRequest;
+
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.*;
 
 
 
-@Controller
+@RestController
 @RequestMapping("/auth")
 public class AuthController {
-
-    @Autowired
+    private AuthenticationManager authenticationManager;
+    private JwtUtil jwtUtil;
     private UserService userService;
 
-    @PostMapping("/signin")
-    public ResponseEntity<?> signin(@RequestBody UserDto userDto) {
+    public AuthController(AuthenticationManager authenticationManager, JwtUtil jwtUtil, UserService userService) {
+        this.authenticationManager = authenticationManager;
+        this.jwtUtil = jwtUtil;
+        this.userService = userService;
+    }
+
+    @PostMapping("/checkusername")
+    public ResponseEntity<?> checkUsername(@RequestBody UsernameRequest username) {
+        try {
+            boolean isDuplicate = userService.checkUsernameExists(username.getUsername());
+            System.out.println(isDuplicate);
+            return ResponseEntity.ok().body(isDuplicate);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Find username failed");
+        }
+    }
+    
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody UserDto userDto) {
         try {
             userService.save(userDto);
-            return ResponseEntity.ok("User registered successfully");
+
+            UserDetails userDetails = userService.loadUserByUsername(userDto.getUsername());
+            String accessToken = jwtUtil.generateToken(userDetails.getUsername());
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.add("Access-Token", accessToken);
+
+            return ResponseEntity.ok().headers(headers).body("User registered successfully");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("User registration failed");
+        }
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginDto loginDto) {
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword())
+            );
+
+            UserDetails userDetails = userService.loadUserByUsername(loginDto.getUsername());
+            
+            String accessToken = jwtUtil.generateToken(userDetails.getUsername());
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.add("Access-Token", accessToken);
+
+            return ResponseEntity.ok().headers(headers).body("User logined successfully");
+        } catch (AuthenticationException e) {
+            return ResponseEntity.badRequest().body("User login failed");
+        }
+    }
+
+    @GetMapping("/user")
+    public ResponseEntity<?> userProfile(HttpServletRequest request) {
+        try {
+            String authorizationHeader = request.getHeader("Authorization");
+            String jwt = authorizationHeader.substring(7);
+            String username = jwtUtil.extractUsername(jwt);
+
+            User user = userService.foundUserProfile(username);
+            return ResponseEntity.ok().body(user);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("User login failed");
         }
     }
     

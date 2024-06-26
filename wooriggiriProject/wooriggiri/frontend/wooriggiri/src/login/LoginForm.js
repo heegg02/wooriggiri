@@ -1,41 +1,41 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
 import styles from './styles/loginForm.module.css'
-import { useAuth } from '../contexts/AuthContext.js';
+import { Link, useNavigate } from 'react-router-dom';
 
 function LoginForm() {
     const navigate = useNavigate();
-    const { login } = useAuth();
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
+    const [isLoginfailed, setIsLoginfailed] = useState(null);
+
     const handleSubmit = async (event) => {
         event.preventDefault();
-        
         try {
             const response = await axios.post('http://localhost:8080/auth/login', 
-            {
-                username: username,
-                password: password
-            },
-            {
-                headers: {
-                    'Content-Type': 'application/json'
+                { 
+                    username, 
+                    password
+                },
+                {
+                    headers: { 'Content-Type': 'application/json' } 
                 }
-            });
-        
-            if (response.status === 200) {
-                const accessToken = response.headers['accesstoken'];
+            );
 
-                login(accessToken);
+            if (response.status === 200) {
+                const accessToken = response.headers['access-token'];
+    
+                localStorage.setItem('accessToken', accessToken);
                 navigate('/');
             } else {
                 console.error('Error:', response.status);
             }
-      } catch (error) {
-          alert('An error occurred:', error);
-      }
+        } catch (error) {
+            setIsLoginfailed(true)
+            console.error('An error occurred:', error);
+        }
   };
 
     return (
@@ -65,6 +65,7 @@ function LoginForm() {
                         required
                     />
                 </div>
+                {isLoginfailed ? '아이디 또는 비밀번호를 확인해주세요.' : ''}
                 <button className={styles.btn} type="submit">로그인</button>
             </form>
             <Link to="/signup"><button className={styles.btn_signUp}>회원 가입</button></Link>

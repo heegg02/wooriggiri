@@ -8,11 +8,8 @@ function MemberInfo() {
 
     return (
         <div className={ styles.memberInfoContainer }>
-            <h3>{username} 님</h3>
-            <div>
-                <button onClick={ logout }>로그아웃</button>
-                <button onClick={ logout }>로그아웃</button>
-            </div>
+            <p>{username} 님</p>
+            <button onClick={ logout }>로그아웃</button>
         </div>
     );
 }

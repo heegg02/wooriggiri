@@ -6,15 +6,10 @@ import { useAuth } from '../contexts/AuthContext.js';
 
 function MyInfo() {
     const { loginStatus } = useAuth();
-    function isLogin() {
-        if (loginStatus) {
-            return <MemberInfo/>
-        }
-        return <LoginBtn/>
-    };
+    
     return (
         <div className={`${styles.container}`}> 
-            { isLogin() }
+            { loginStatus ? <MemberInfo/> : <LoginBtn/> }
         </div>
     );
 }

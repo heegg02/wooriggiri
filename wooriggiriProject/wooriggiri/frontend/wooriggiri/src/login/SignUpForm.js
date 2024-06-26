@@ -6,63 +6,96 @@ import styles from './styles/signUpForm.module.css';
 function SignUpForm() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        console.log(username, password);
-        try {
-            const response = await axios.post('http://localhost:8080/auth/register', 
-                { 
-                    username, 
-                    password
-                },
-                { 
-                    headers: { 'Content-Type': 'application/json' } 
-                }
-            );
+    
+    const [isUsernameValid, setIsUsernameValid] = useState(false);
+    const [isPasswordValid, setIsPasswordValid] = useState(false);
+    const [isUsernameDuplicate, setIsUsernameDuplicate] = useState(false);
 
+    const usernameHandleChange = async (e) => {
+        const username = e.target.value;
+        if (/^.{5,12}$/.test(username)) {
+            setIsUsernameValid(true);
+            const response = await axios.post('http://localhost:8080/auth/checkusername', { username })
             if (response.status === 200) {
-                console.log("User registered successfully");
+                setIsUsernameDuplicate(response.data);
+                setUsername(username);
             } else {
                 console.error('Error:', response.status);
             }
-        } catch (error) {
-            console.error('An error occurred:', error);
+        } else {
+            setIsUsernameValid(false);
+            setIsUsernameDuplicate(false);
+        }
+    };
+
+    const passwordHandleChange = (e) => {
+        const value = e.target.value;
+        if (/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(value)) {
+            setIsPasswordValid(true);
+            setPassword(value);
+        } else {
+            setIsPasswordValid(false);
+        }
+    };
+
+    const handleSubmit = async () => {
+        console.log(isUsernameValid, isPasswordValid, isUsernameDuplicate);
+        if (isUsernameValid && isPasswordValid && !isUsernameDuplicate) {
+            console.log(username, password);
+            try {
+                const response = await axios.post('http://localhost:8080/auth/register', 
+                    { 
+                        username, 
+                        password
+                    },
+                    { 
+                        headers: { 'Content-Type': 'application/json' } 
+                    }
+                );
+    
+                if (response.status === 200) {
+                    const accessToken = response.headers['access-token'];
+        
+                    console.log(response.data);
+                    console.log('Access Token:', accessToken);
+                    localStorage.setItem('accessToken', accessToken);
+                } else {
+                    console.error('Error:', response.status);
+                }
+            } catch (error) {
+                console.error('An error occurred:', error);
+            }
+        } else {
+            alert('아이디 또는 비밀번호를 확인해주세요.')
         }
     };
 
     return (
         <>  
             <h3>회원 가입</h3>
-            <form onSubmit={ handleSubmit }>
-                <div className={styles.input_group}>
-                    <label htmlFor="username">Id / User Name</label>
-                    <div className={styles.input_id_container}>
-                        <input
-                            type="text"
-                            placeholder="아이디"
-                            id="username"
-                            name="username"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                            required
-                        />
-                        <button>중복확인</button>
-                    </div>
-                </div>
-                <div className={styles.input_group}>
-                    <label htmlFor="password">Password</label>
-                    <input
-                        type="password"
-                        placeholder="비밀번호"
-                        id="password"
-                        name="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </div>
-                <button className={styles.btn} type="submit">회원 가입</button>
-            </form>
+            <div className={styles.input_group}>
+                <label htmlFor="username">Id / User Name</label>
+                <input
+                    type="text"
+                    placeholder="아이디"
+                    id="username"
+                    name="username"
+                    onChange={usernameHandleChange}
+                />
+                {!isUsernameValid ? '5 ~ 12자 이내' : (isUsernameDuplicate ? '이미 사용중인 아이디입니다.' : '사용 가능한 아이디 입니다.')}
+            </div>
+            <div className={styles.input_group}>
+                <label htmlFor="password">Password</label>
+                <input
+                    type="password"
+                    placeholder="비밀번호"
+                    id="password"
+                    name="password"
+                    onChange={passwordHandleChange}
+                />
+                {!isPasswordValid ? '8자 이상, 영문자, 숫자 포함' : '사용 가능한 비밀번호 입니다.'}
+            </div>
+            <button className={styles.btn} onClick={handleSubmit} type="button">회원 가입</button>
             <Link to="/login"><button className={styles.btn_signUp}>로그인으로</button></Link>
         </>
     );

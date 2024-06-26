@@ -1,20 +1,50 @@
 package com.wooriggiri.api.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.ArrayList;
 
-import com.wooriggiri.api.dto.UserDto;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
 import com.wooriggiri.api.model.User;
+import com.wooriggiri.api.model.UserDto;
 import com.wooriggiri.api.repository.UserRepository;
 
-public class UserService {
+@Service
+public class UserService implements UserDetailsService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public void save(UserDto userDto) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), new ArrayList<>());
+    }
+ 
+    public User save(UserDto userDto) {
         User user = new User();
         user.setUsername(userDto.getUsername());
-        user.setPassword(userDto.getPassword());
-        userRepository.saveUser(user.getUsername(), user.getPassword(), user.getEmail());
+        user.setUserType(1);
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        return userRepository.save(user);
+    }
+
+    public boolean checkUsernameExists(String username) {
+        return userRepository.findByUsername(username) != null;
+    }
+
+    public User foundUserProfile(String username) {
+        return userRepository.findByUsername(username);
     }
 }
