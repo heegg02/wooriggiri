@@ -3,15 +3,9 @@
     grid-template-areas: 
         "sidebar header"
         "sidebar mainContent";
-    grid-template-rows: 5vh auto;
+    grid-template-rows: 50px auto;
     height: 100vh;
-    transition: 0.4s ease;
-}
-.container.expended {
-    grid-template-columns: 280px auto;
-}
-.container.collapsed {
-    grid-template-columns: 0 auto;
+    grid-template-columns: auto 1fr;
 }
 
 .header {

@@ -1,12 +1,17 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import MyInfo from './MyInfo.js'
-import SidebarItem from './SidebarItem.js'
+import SidebarContent from './SidebarContent.js'
 import styles from './styles/sidebar.module.css'
+import axios from 'axios';
+
 import { useAuth } from '../contexts/AuthContext.js';
 
-function Sidebar({ className, toggleSidebar, isSidebarExpanded }) {
-    const { loginStatus } = useAuth();
+function Sidebar({ className }) {
+    const [ isSidebarExpanded, setIsSidebarExpanded ] = useState(true);
     const buttonRef = useRef();
+    const { loginStatus } = useAuth();
+
+    
 
     useEffect(() => {
         const button = buttonRef.current;
@@ -51,8 +56,12 @@ function Sidebar({ className, toggleSidebar, isSidebarExpanded }) {
         }
     }, [isSidebarExpanded]);
 
+    const toggleSidebar = () => {
+        setIsSidebarExpanded(prevState => !prevState);
+    };
+
     return (
-        <div className={`${ className } ${styles.sidebar}`}>
+        <div className={`${ className } ${styles.sidebar} ${isSidebarExpanded ? styles.expended : styles.collapsed}`}>
             <div ref={ sidebar_boxRef } className={`${styles.sidebar_box} ${isSidebarExpanded ? styles.expended : styles.collapsed}`}>
                 <div>
                     <div className={`${styles.sidebar_box_header}`}>
@@ -67,7 +76,7 @@ function Sidebar({ className, toggleSidebar, isSidebarExpanded }) {
                 </div>
                 <div className={`${styles.sidebar_box_list}`}>
                     <MyInfo/>
-                    { loginStatus ? <SidebarItem/> : ''}
+                    { loginStatus ? <SidebarContent/> : '' }
                 </div>
             </div>
         </div>

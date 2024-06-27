@@ -3,8 +3,8 @@ import styles from './styles/loginBtn.module.css'
 import { useAuth } from '../contexts/AuthContext.js';
 
 function MemberInfo() {
-    const { logout } = useAuth();
-    const username = "HEEgg";
+    const { logout, userProfile } = useAuth();
+    const username = userProfile.username;
 
     return (
         <div className={ styles.memberInfoContainer }>

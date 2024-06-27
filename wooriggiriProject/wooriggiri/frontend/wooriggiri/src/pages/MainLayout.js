@@ -8,7 +8,6 @@ import axios from 'axios';
 import { useAuth } from '../contexts/AuthContext.js';
 
 function Main( { children } ) {
-    const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
     const { logout, login } = useAuth();
 
     useEffect(() => {
@@ -33,14 +32,10 @@ function Main( { children } ) {
         fetchUserProfile();
     }, []);
 
-    const toggleSidebar = () => {
-        setIsSidebarExpanded(prevState => !prevState);
-    };
-
     return (
-        <div className={`${styles.container} ${isSidebarExpanded ? styles.expended : styles.collapsed}`}>
+        <div className={`${styles.container} `}>
             <Header className={`${styles.header}`} />
-            <Sidebar className={`${styles.sidebar}`} toggleSidebar={ toggleSidebar } isSidebarExpanded={ isSidebarExpanded }/>
+            <Sidebar className={`${styles.sidebar}`}/>
             <Content className={`${styles.content}`}>
                 { children }
             </Content>

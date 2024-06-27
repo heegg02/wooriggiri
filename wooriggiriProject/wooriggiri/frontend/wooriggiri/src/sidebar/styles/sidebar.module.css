@@ -1,6 +1,14 @@
 .sidebar {
     display: flex;
+    transition: 0.4s ease;
 }
+.sidebar.expended{
+    width: 280px;
+}
+.sidebar.collapsed{
+    width: 0px;
+}
+
 .sidebar_box {
     align-self: center;
     width: 280px;
@@ -11,11 +19,15 @@
     position: fixed;
     transition: 0.3s ease;
 }
+
 .sidebar_box.expended {
+    top: 0;
+    bottom: 0;
     height: 100%;
     border-right: 0.4px solid #A4A3A4;
     border-radius: 0 10px 10px 0;
 }
+
 .sidebar_box.collapsed {
     position: fixed;
     height: 90%;

@@ -5,7 +5,7 @@ import MainContent from './MainContent.js';
 
 function Content({ className, children }) {
     return (
-        <div className={className}>
+        <div className={`${className} ${styles.container}`}>
             { children }
         </div>
     );
