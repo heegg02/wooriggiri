@@ -11,8 +11,8 @@ function LoginForm() {
 
     const [isLoginfailed, setIsLoginfailed] = useState(null);
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
         try {
             const response = await axios.post('http://localhost:8080/auth/login', 
                 { 
@@ -49,7 +49,6 @@ function LoginForm() {
                         placeholder="아이디"
                         id="username"
                         name="username"
-                        value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         required
                     />
@@ -68,7 +67,7 @@ function LoginForm() {
                 {isLoginfailed ? '아이디 또는 비밀번호를 확인해주세요.' : ''}
                 <button className={styles.btn} type="submit">로그인</button>
             </form>
-            <Link to="/signup"><button className={styles.btn_signUp}>회원 가입</button></Link>
+            <Link className={`${styles.a} ${styles.btn_signUp}`} to="/signup">회원 가입</Link>
         </>
     );
 } 

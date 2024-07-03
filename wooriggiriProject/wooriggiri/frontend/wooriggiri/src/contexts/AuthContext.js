@@ -1,11 +1,11 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [userProfile, setUserProfile] = useState(null);
-    const [loginStatus, setLoginStatus] = useState(false);
-
+    const [loginStatus, setLoginStatus] = useState(null);
+    
     const login = (user) => {
         console.log(user);
         setUserProfile(user);

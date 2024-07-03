@@ -20,8 +20,8 @@
 }
   
 .btn {
+    font-size: 13px;
     transition: 0.1s ease;
-    font-size: 15px;
     width: 100%;
     padding: 10px;
     background-color: #d6d6d6;
@@ -37,6 +37,7 @@
 }
 
 .btn_signUp {
+    font-size: 13px;
     background-color: white;
     margin-top: 10px;
     padding: 5px;
@@ -51,4 +52,14 @@
 }
 .input_id_container {
     display: flex;
+}
+
+.a:link {
+    text-decoration-line: none;
+}
+.a:visited, .a:active {
+    color: rgb(66, 66, 66);
+}
+.a:hover {
+    color: #eeeeee;
 }

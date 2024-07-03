@@ -3,8 +3,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
-import Community from './content/Community.js';
-import MainContent from './content/MainContent.js';
+import Board from './content/Board.js';
+import Main from './content/Main.js';
 import MainLayout from './pages/MainLayout.js'
 import Login from './login/Login.js'
 import LoginForm from './login/LoginForm.js';
@@ -18,11 +18,12 @@ function App() {
         <BrowserRouter>
             <AuthProvider>
                 <Routes>
-                    <Route path="/" element={<MainLayout><MainContent/></MainLayout>}></Route>
+                    <Route path="/" element={<MainLayout><Main/></MainLayout>}></Route>
                     <Route path="/login" element={<Login><LoginForm/></Login>}></Route>
                     <Route path="/signup" element={<Login><SignUpForm/></Login>}></Route>
                     <Route path="/community/:communityName">
-                        <Route path="" element={<MainLayout><Community/></MainLayout>}></Route>
+                        <Route path="" element={<MainLayout><Board/></MainLayout>}></Route>
+                        <Route path="post/:postId" element={<MainLayout><Board/></MainLayout>}></Route>
                     </Route>
                     <Route path="*" element={<NotFound/>}></Route>
                 </Routes>

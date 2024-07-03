@@ -1,0 +1,27 @@
+.box {
+    height: 50px;
+    padding: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+.id {
+    min-width: 30px;
+}
+.title {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: left;
+    text-overflow: ellipsis;
+}
+.postInfo {
+    display: flex;
+    width: 400px;
+    justify-content: space-between;
+}
+
+.ac_c {
+    align-content: center;
+    white-space: nowrap;
+}

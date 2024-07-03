@@ -18,7 +18,7 @@ function CreatePost() {
 
     return (
         <h1>게시글 작성 페이지 입니다.</h1>
-    ); // 모든 조건에 해당하지 않을 때
+    );
 }
 
 export default CreatePost;

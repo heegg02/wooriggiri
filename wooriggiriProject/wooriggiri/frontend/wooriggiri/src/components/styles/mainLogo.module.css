@@ -2,6 +2,9 @@
     display: flex;
     align-items: center;
     text-decoration: none;
+    height: 50px;
+    flex-direction: row;
+    margin-right: 40px;
 }
 
 .logo {

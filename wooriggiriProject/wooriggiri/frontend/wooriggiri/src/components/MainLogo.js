@@ -7,7 +7,7 @@ function MainLogo() {
     return (
         <Link to="/" className={styles.logo_container}>
             <img className={styles.logo} src={wooriggiriLogo} alt="wooriggiri" />
-           <span className={styles.logo_text}>Wooriggiri</span>
+            <span className={styles.logo_text}>Wooriggiri</span>
         </Link>
     );
 } 

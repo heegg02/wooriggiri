@@ -1,30 +1,37 @@
 import React, { useState, useEffect } from "react";
 import styles from './styles/sidebarContent.module.css'
 import { useAuth } from '../contexts/AuthContext.js';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 function SidebarContent() {    
     const { userProfile } = useAuth();
-    const [ communityList, setCommunityList ] = useState(null);
+    const [ myCommunityList, setMyCommunityList ] = useState(null);
+    const [ favoriteCommunities, setFavoriteCommunities ] = useState(null);
+
     useEffect(() => {
         const fetchMyCommunityList = async () => {
-            try {
-                const response = await axios.get(`http://localhost:8080/api/mycommunitylist?userId=${userProfile.id}`);
-                if (response.status === 200) {
-                    setCommunityList(response.data);
-                } else {
-                }
-            } catch (error) {
+            const response = await axios.get(`http://localhost:8080/api/communitylist?userId=${userProfile.id}`);
+            if (response.status === 200) {
+                setMyCommunityList(response.data.myCommunityList);
+                setFavoriteCommunities(response.data.favoriteCommunities);
+            } else {
+                setMyCommunityList(response.data.myCommunityList);
+                setFavoriteCommunities(response.data.favoriteCommunities);
             }
         };
         fetchMyCommunityList();
     }, [])
-    
+
     function generateList(Lists) {
         const listItems = [];
 
         for (let i = 0; i < Lists.length; i++) {
-            listItems.push(<div key={i} className={`${styles.Content}`}>{Lists[i]}</div>);
+            listItems.push(
+                <Link key={i} className={`${styles.content}`} to={`/community/${Lists[i]}`}>
+                    {Lists[i]} 게시판
+                </Link>
+            );
         }
 
         return listItems
@@ -34,35 +41,43 @@ function SidebarContent() {
         <div className={styles.container}>
             <div className={styles.list}>
                 <div className={`${styles.title}`}>
-                    내 게시판
+                    {userProfile.username}'s 페이지
                 </div>
                 <div className={styles.box}>
                     <div className={styles.item}>
-                        <div className={`${styles.Content}`}>
-                            게시판 바로가기
-                        </div>
-                        <div className={`${styles.Content}`}>
+                        <Link className={`${styles.content}`} to={`/user/${userProfile.username}`}>
+                            페이지 바로가기
+                        </Link>
+                        <Link className={`${styles.content}`} to={`/user/${userProfile.username}`}>
                             글 작성
-                        </div>
+                        </Link>
                     </div>
                 </div>
             </div>
             <div className={styles.list}>
                 <div className={`${styles.title}`}>
-                    내 커뮤니티
+                    내가 만든 게시판
                 </div>
                 <div className={styles.box}>
                     <div className={styles.item}>
-                        { communityList ?
-                            generateList(communityList) : 
-                            <div className={`${styles.Content}`}>커뮤니티 만들기</div>
+                        { myCommunityList && myCommunityList.length > 0 ?
+                            generateList(myCommunityList) : 
+                            <div className={`${styles.content}`}>새로운 게시판 생성</div>
                         }
                     </div>
                 </div>
             </div>
             <div className={styles.list}>
                 <div className={`${styles.item} ${styles.title}`}>
-                    즐겨찾는 커뮤니티
+                    즐겨찾는 게시판
+                </div>
+                <div className={styles.box}>
+                    <div className={styles.item}>
+                        { favoriteCommunities && favoriteCommunities.length > 0 ?
+                            generateList(favoriteCommunities) : 
+                            <div className={`${styles.content}`}>아직 즐겨찾는 게시판이 없습니다.</div>
+                        }
+                    </div>
                 </div>
             </div>
         </div>

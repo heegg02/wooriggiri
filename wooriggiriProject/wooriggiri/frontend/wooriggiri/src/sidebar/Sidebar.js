@@ -2,16 +2,17 @@ import React, { useState, useEffect, useRef } from 'react';
 import MyInfo from './MyInfo.js'
 import SidebarContent from './SidebarContent.js'
 import styles from './styles/sidebar.module.css'
-import axios from 'axios';
-
 import { useAuth } from '../contexts/AuthContext.js';
 
 function Sidebar({ className }) {
     const [ isSidebarExpanded, setIsSidebarExpanded ] = useState(true);
     const buttonRef = useRef();
     const { loginStatus } = useAuth();
+    const sidebar_boxRef = useRef();
 
-    
+    const toggleSidebar = () => {
+        setIsSidebarExpanded(prevState => !prevState);
+    };
 
     useEffect(() => {
         const button = buttonRef.current;
@@ -27,8 +28,6 @@ function Sidebar({ className }) {
 
         }
     });
-
-    const sidebar_boxRef = useRef();
     
     useEffect(() => {
         const sidebar_box = sidebar_boxRef.current;
@@ -56,27 +55,26 @@ function Sidebar({ className }) {
         }
     }, [isSidebarExpanded]);
 
-    const toggleSidebar = () => {
-        setIsSidebarExpanded(prevState => !prevState);
-    };
-
+    function sidebarContent() {
+        if(loginStatus) {
+            return <SidebarContent/>
+        }
+    }
+    
     return (
         <div className={`${ className } ${styles.sidebar} ${isSidebarExpanded ? styles.expended : styles.collapsed}`}>
             <div ref={ sidebar_boxRef } className={`${styles.sidebar_box} ${isSidebarExpanded ? styles.expended : styles.collapsed}`}>
                 <div>
                     <div className={`${styles.sidebar_box_header}`}>
                         <div className={`${styles.sidebar_box_header_item}`}>
-                            <i className='bi bi-menu-up'/>
-                            Menu
+                            <i className='bi bi-menu-up'/> Menu
                         </div>
-                        <div ref={ buttonRef } className={`${styles.sidebar_box_header_item}`}>
-                            <i className={`bi ${isSidebarExpanded ? 'bi-chevron-double-left' : 'bi-chevron-double-right'}`}></i>
-                        </div>
+                        <i ref={ buttonRef } className={`${styles.sidebar_box_header_item} bi ${isSidebarExpanded ? 'bi-chevron-double-left' : 'bi-chevron-double-right'}`}></i>
                     </div>
                 </div>
                 <div className={`${styles.sidebar_box_list}`}>
                     <MyInfo/>
-                    { loginStatus ? <SidebarContent/> : '' }
+                    { sidebarContent() }
                 </div>
             </div>
         </div>

@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
 
-
 * {
   box-sizing: border-box;
   font-family: "Do Hyeon", sans-serif;
@@ -14,5 +13,11 @@ i {
   transition: 0.4s ease;
   color :black;
   font-size: 1.5rem;
-  padding-right: 10px;
+}
+
+a:link {
+  text-decoration-line: none;
+}
+a:visited, .a:active {
+  color: black;
 }
