@@ -27,16 +27,20 @@ public class AppController {
 
     @GetMapping("/communityposts")
     public ResponseEntity<?> communityPosts(@RequestParam int page, @RequestParam String communityname) {
-        // try {
-            System.out.println(page);
-            System.out.println(communityname);
+        try {
             ResponsDTO response = appService.searchBoardByCommunityName(page, communityname);
             return ResponseEntity.ok().body(response);
-        // } catch (Exception e) {
-        //     return ResponseEntity.badRequest().body("Get failed");
-        // }
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Get failed");
+        }
     }
 
+    // @GetMapping("/postdetail")
+    // public String postDetail(@RequestParam int postId) {
+    //     ResponsDTO response = appService.searchPostDetail(postId);
+    //     return ResponseEntity.ok().body(response);
+    // }
+    
     @GetMapping("/notiesposts")
     public ResponseEntity<?> notiesPosts() {
         try {

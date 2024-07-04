@@ -5,11 +5,13 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 
 import Board from './content/Board.js';
 import Main from './content/Main.js';
+import PostDetail from './content/PostDetail.js'
+import UserDetail from './content/UserDetail.js'
 import MainLayout from './pages/MainLayout.js'
 import Login from './login/Login.js'
 import LoginForm from './login/LoginForm.js';
 import SignUpForm from './login/SignUpForm.js';
-import NotFound from './pages/NotFound'
+import NotFound from './pages/NotFound';
 
 import { AuthProvider } from './contexts/AuthContext.js';
 
@@ -23,7 +25,13 @@ function App() {
                     <Route path="/signup" element={<Login><SignUpForm/></Login>}></Route>
                     <Route path="/community/:communityName">
                         <Route path="" element={<MainLayout><Board/></MainLayout>}></Route>
-                        <Route path="post/:postId" element={<MainLayout><Board/></MainLayout>}></Route>
+                        <Route path="post/:postId" element={<MainLayout><PostDetail/></MainLayout>}></Route>
+                        <Route path="*" element={<MainLayout><NotFound/></MainLayout>}></Route>
+                    </Route>
+                    <Route path="/user/:userId">
+                        <Route path="" element={<MainLayout><UserDetail/></MainLayout>}></Route>
+                        <Route path="post/:postId" element={<MainLayout><PostDetail/></MainLayout>}></Route>
+                        <Route path="*" element={<MainLayout><NotFound/></MainLayout>}></Route>
                     </Route>
                     <Route path="*" element={<NotFound/>}></Route>
                 </Routes>

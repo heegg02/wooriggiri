@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styles from './styles/board.module.css';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext.js';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import PostRow from './components/PostRow.js';
@@ -25,7 +24,7 @@ function Community() {
             }
         };
         fetch();
-    }, [])
+    }, [communityName])
 
     useEffect(() => {
         const container = containerRef.current;
@@ -48,6 +47,10 @@ function Community() {
             }
         };
     }, []);
+    
+    if (!data || !userProfile) {
+        return <div ref={containerRef}>Loading...</div>;
+    }
 
     function createdDate(createDate) {
         const dateParts = createDate.split("T");
@@ -55,23 +58,6 @@ function Community() {
         return `${date}  ${time}`;
     }
 
-    if (!data) {
-        return <div ref={containerRef}>Loading...</div>;
-    }
-
-
-    function generateList(Lists) {
-        if(Lists && Lists.length > 0) {
-            const listItems = [];
-            for (let i = 0; i < Lists.length; i++) {
-                console.log(i);
-                listItems.push(
-                    <PostRow key={i} post={Lists[i]}/>
-                );
-            }
-            return listItems
-        }
-    }
 
     return (
         <div ref={containerRef} className={`${styles.container} ${isWide ? styles.grid : styles.flex}`}>
@@ -96,18 +82,16 @@ function Community() {
                     </div>
                     <div className={`${styles.flexMenu}`}>
                         <i className={`${styles.writePost} bi bi-pencil-square`}/>
-                        {/* {postsMetadata.userId == userProfile.id ? <i className={`${styles.communitySetting} bi bi-wrench`}/> : ''} */}
+                        {data.metadata.userId == userProfile.id ? <i className={`${styles.communitySetting} bi bi-wrench`}/> : ''}
                     </div>                
                 </div>
                 <div className={`${styles.gridMenu}`}>
                     <i className={`${styles.writePost} bi bi-pencil-square`}/>
-                    {/* {postsMetadata.userId == userProfile.id ? <i className={`${styles.communitySetting} bi bi-wrench`}/> : ''} */}
+                    {data.metadata.userId == userProfile.id ? <i className={`${styles.communitySetting} bi bi-wrench`}/> : ''}
                 </div>
             </div>
             <div className={`${styles.boardContainer}`}>
-                <div className={`${styles.board} ${styles.box}`}>
-                    {generateList(data.result)}
-                </div>
+                <PostRow  post={data.result}/>
             </div>
         </div>
     );
