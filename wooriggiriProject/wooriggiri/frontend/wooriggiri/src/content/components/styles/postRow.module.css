@@ -32,7 +32,7 @@
 .postInfo {
     display: flex;
     width: 400px;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 .ac_c {
@@ -45,4 +45,8 @@
 }
 .box a:hover {
     color: #505050;
+}
+.createdDate {
+    min-width: 140px;
+    text-align: center;
 }

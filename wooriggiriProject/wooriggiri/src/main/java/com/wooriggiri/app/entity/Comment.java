@@ -14,11 +14,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class User extends Datetime {
+public class Comment extends Datetime{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int userType;
-    private String username;
-    private String password;
+    private int commentType;
+    private Long postId;
+    private Long userId;
+    private String content;
+    private Long parentCommentId;
+    private int orderNumber;
+    private int depth;
 }

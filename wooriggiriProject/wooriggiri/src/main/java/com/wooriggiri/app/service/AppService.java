@@ -14,9 +14,12 @@ import org.springframework.stereotype.Service;
 
 import com.wooriggiri.app.domain.BoardItemDTO;
 import com.wooriggiri.app.domain.BoardListDTO;
+import com.wooriggiri.app.domain.CommentDTO;
+import com.wooriggiri.app.domain.CommentResponseDTO;
 import com.wooriggiri.app.domain.ResponsDTO;
 import com.wooriggiri.app.entity.Board;
 import com.wooriggiri.app.repository.BoardRepository;
+import com.wooriggiri.app.repository.CommentRepository;
 import com.wooriggiri.app.repository.PostRepository;
 import com.wooriggiri.app.repository.UserRepository;
 
@@ -29,15 +32,18 @@ public class AppService {
     @Autowired
     private PostRepository postRepository;
     @Autowired
+    private CommentRepository commentRepository;
+    @Autowired
     private RedisTemplate<String, Object> redisTemplate;
     
     public ResponsDTO searchBoardByCommunityName(int page, String boardname) {
-        List<?> result = new ArrayList<>();
-        Map<String, Object> metadata = new HashMap<>();
 
         Pageable pageable = PageRequest.of(page-1, 20);
+        List<?> result = postRepository.findByBoardname(boardname, pageable);
+        
+        Map<String, Object> metadata = new HashMap<>();
+
         Board board = boardRepository.findByBoardname(boardname);
-        result = postRepository.findByBoardname(boardname, pageable);
 
         String cacheKey = "board_follower_count_" + boardname;
 
@@ -56,6 +62,44 @@ public class AppService {
 
         ResponsDTO responsDTO = new ResponsDTO(result, metadata);
 
+        return responsDTO;
+    }
+
+    public ResponsDTO searchPostDetail(int postId) {
+        postRepository.incrementViewCount(postId);
+        List<?> result = postRepository.findByPostId(postId);
+        Map<String, Object> metadata = new HashMap<>();
+
+        metadata.put("dataInfo", "PostDetail");
+
+        ResponsDTO responsDTO = new ResponsDTO(result, metadata);
+        return responsDTO;
+    }
+
+    public List<CommentResponseDTO> searchChildComment(List<CommentDTO> comments) {
+        List<CommentResponseDTO> parent = new ArrayList<>();
+        if(comments.size() > 0) {
+            for(CommentDTO comment :comments) {
+                List<CommentDTO> childComments = commentRepository.findChildComment(comment.getCommentId());
+                List<CommentResponseDTO> childResponses = searchChildComment(childComments);
+                
+                CommentResponseDTO commentResponse = new CommentResponseDTO(comment, childResponses);
+
+                parent.add(commentResponse);
+            }
+        }
+        return parent;
+    }
+
+    public ResponsDTO searchComment(int postId) {
+        List<CommentDTO> firstComment = commentRepository.findFirstByPostId(postId);
+        List<CommentResponseDTO> result = searchChildComment(firstComment);
+
+        Map<String, Object> metadata = new HashMap<>();
+
+        metadata.put("dataInfo", "Comment");
+
+        ResponsDTO responsDTO = new ResponsDTO(result, metadata);
         return responsDTO;
     }
 

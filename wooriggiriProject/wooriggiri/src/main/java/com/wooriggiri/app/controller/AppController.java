@@ -35,11 +35,21 @@ public class AppController {
         }
     }
 
-    // @GetMapping("/postdetail")
-    // public String postDetail(@RequestParam int postId) {
-    //     ResponsDTO response = appService.searchPostDetail(postId);
-    //     return ResponseEntity.ok().body(response);
-    // }
+    @GetMapping("/postdetail")
+    public ResponseEntity<?> postDetail(@RequestParam int postId) {
+        try {
+            ResponsDTO response = appService.searchPostDetail(postId);
+            return ResponseEntity.ok().body(response);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Get failed");
+        }
+    }
+    
+    @GetMapping("/comment")
+    public ResponseEntity<?> comment(@RequestParam int postId) {
+        ResponsDTO response = appService.searchComment(postId);
+        return ResponseEntity.ok().body(response);
+    }
     
     @GetMapping("/notiesposts")
     public ResponseEntity<?> notiesPosts() {

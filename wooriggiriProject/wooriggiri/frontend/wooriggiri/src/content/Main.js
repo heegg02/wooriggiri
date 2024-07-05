@@ -11,14 +11,6 @@ import wooriggiriLogo  from '../assets/Logo.png'
 function Main() {
     const { loginStatus } = useAuth();
     const [isWide, setIsWide] = useState(true);
-    const [notNull, setNotNull] = useState(false);
-
-    useEffect(() => {
-        if(!(loginStatus == null)) {
-            setNotNull(true)
-        }
-    }, [loginStatus])
-
     const containerRef = useRef(null);
 
     useEffect(() => {
@@ -64,26 +56,30 @@ function Main() {
         }
     }
 
+    if (!loginStatus==null) {
+        return <></>;
+    }
+
     return (
         <div ref={containerRef} className={`${styles.container} ${isWide ? styles.grid : styles.flex}`}>
             <div className={`${styles.box}`}>
                 <div className={styles.title}>
                     전체 게시판 인기 순위
                 </div>
-                {notNull ? <PopularCommunities/> : ''}
+                <PopularCommunities/>
             </div>
             <div className={`${styles.box}`}>
                 <div className={styles.title}>
                     전체 게시글 인기 순위
                 </div>
-                {notNull ? <PopularPosts/> : ''}
+                <PopularPosts/>
             </div>
             {myOwnBox()}
             <div className={`${styles.box}`}>
                 <div className={styles.title}>
                     공지
                 </div>
-                {notNull ? <NotiesPosts/> : ''}
+                <NotiesPosts/>
             </div>
         </div>
     );

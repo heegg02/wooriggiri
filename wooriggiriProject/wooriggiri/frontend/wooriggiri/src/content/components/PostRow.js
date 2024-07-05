@@ -48,6 +48,25 @@ function PostRow( props ) {
 
     return(
         <div className={`${styles.container} ${styles.ac_c}`}>
+            <div className={`${styles.box}`}>
+                <div className={`${styles.id} ${styles.ac_c}`}>
+                    글번호
+                </div>
+                <div className={`${styles.title} ${styles.ac_c}`}>
+                    제목
+                </div>
+                <div className={styles.postInfo}>
+                    <div className={`${styles.viewCount} ${styles.ac_c}`}>
+                        제목
+                    </div>
+                    <div className={`${styles.username} ${styles.ac_c}`}>
+                        조회 수
+                    </div>
+                    <div className={`${styles.createdDate} ${styles.ac_c}`}>
+                        작성일
+                    </div>
+                </div>
+            </div>
             {generateList(posts)}
         </div>
     );

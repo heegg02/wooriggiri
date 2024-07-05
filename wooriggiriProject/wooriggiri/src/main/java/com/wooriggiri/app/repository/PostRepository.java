@@ -5,11 +5,14 @@ import java.util.List;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.wooriggiri.app.domain.BoardItemDTO;
+import com.wooriggiri.app.domain.PostDetailDTO;
 import com.wooriggiri.app.entity.Post;
 
 @Repository
@@ -18,6 +21,17 @@ public interface PostRepository extends JpaRepository<Post, Long> {
        int countByBoardId(Long boardId);
 
        int countByUserId(Long userId);
+
+       @Transactional
+       @Modifying
+       @Query("UPDATE Post p SET p.viewCount = p.viewCount + 1 WHERE p.id = :postId")
+       int incrementViewCount(int postId);
+
+       @Query("SELECT new com.wooriggiri.app.domain.PostDetailDTO(p.id, p.title, u.username, p.content p,viewCount, p.createdDate, p.updatedDate) " +
+       "FROM Post p " +
+       "JOIN User u ON p.userId = u.id " +
+       "WHERE p.id = :postId ")
+       List<PostDetailDTO> findByPostId(int postId);
 
        @Query("SELECT new com.wooriggiri.app.domain.BoardItemDTO(p.id, b.boardname, u.username, p.title, p.viewCount, p.createdDate, p.updatedDate) " +
        "FROM Post p " +

@@ -13,12 +13,11 @@
     gap: 10px
 }
 
-.box .header, .box .postContent, .box .comment{
+.box .header, .box .postContent{
     background-color: rgb(255, 255, 255);
     border-radius: 20px;
     border: 0.4px solid #d3d3d350;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
 }
 
 .header {
@@ -49,7 +48,7 @@
     font-size: 25px;
 }
 
-.header .createdDate, .header .username, .header .viewCount {
+.header .updatedDate, .header .createdDate, .header .username, .header .viewCount {
     text-align: right;
 }
 
@@ -59,8 +58,4 @@
     min-height: 500px;
     display: flex;
     flex-direction: column;
-}
-
-.comment {
-
 }
