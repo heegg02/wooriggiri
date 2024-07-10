@@ -1,0 +1,33 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.container textarea, .container input {
+    width: 500px;
+    border: 1px solid rgb(156, 156, 156);
+    resize: none;
+}
+
+.title {
+    font-size: 18px;
+    height: 30px;
+    margin-bottom: 10px;
+}
+
+.content {
+    font-size: 15px;
+    height: 100%;
+    min-height: 100px;
+    overflow: none;
+    overflow: hidden;
+}
+
+.container button {
+    border: none;
+    transition: 0.2s ease;
+    border-radius: 300px;
+}
+.container button:hover {
+    background-color: rgb(180, 180, 180);
+}

@@ -42,7 +42,7 @@ public class CacheInitializationService {
         List<Board> boards = boardRepository.findAll();
 
         for (Board board : boards) {
-            String cacheKey = "board_follower_count_" + board.getBoardname();
+            String cacheKey = "board_follower_count_" + board.getId();
             int count = boardFavoriteRepository.countByBoardId(board.getId());
             redisTemplate.opsForValue().set(cacheKey, count);
         }
@@ -54,7 +54,7 @@ public class CacheInitializationService {
         List<User> users = userRepository.findAll();
 
         for (User user : users) {
-            String cacheKey = "user_follower_count_" + user.getUsername();
+            String cacheKey = "user_follower_count_" + user.getId();
             int count = userFavoriteRepository.countByUserId(user.getId());
             redisTemplate.opsForValue().set(cacheKey, count);
         }
@@ -66,7 +66,7 @@ public class CacheInitializationService {
         List<Board> boards = boardRepository.findAll();
 
         for (Board board : boards) {
-            String cacheKey = "board_postsLength_count_" + board.getBoardname();
+            String cacheKey = "board_postsLength_count_" + board.getId();
             int count = postRepository.countByBoardId(board.getId());
             redisTemplate.opsForValue().set(cacheKey, count);
         }
@@ -78,7 +78,7 @@ public class CacheInitializationService {
         List<User> users = userRepository.findAll();
 
         for (User user : users) {
-            String cacheKey = "user_postsLength_count_" + user.getUsername();
+            String cacheKey = "user_postsLength_count_" + user.getId();
             int count = postRepository.countByUserId(user.getId());
             redisTemplate.opsForValue().set(cacheKey, count);
         }

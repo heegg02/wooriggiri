@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CommentResponseDTO {
     private CommentDTO comment;
-    private List<CommentResponseDTO> childrenComment;
+    private List<CommentResponseDTO> childComments;
 }

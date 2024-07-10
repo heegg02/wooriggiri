@@ -1,0 +1,89 @@
+.btncontainer {
+    display: flex;
+    gap: 5px;
+    z-index: 50;
+}
+.box {
+    max-width: 750px;
+    gap: 10px;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    border: 0.4px solid #d3d3d350;
+}
+.btn {
+    padding: 5px 8px 0 8px;
+    background-color: rgb(221, 221, 221);
+    border-radius: 10px 10px 0 0;
+    border: 0.4px solid #d3d3d350;
+}
+.btn.select {
+    background-color: rgb(255, 255, 255);
+}
+.content {
+    padding: 10px;
+}
+
+.pagingContainer {
+    padding-top: auto;
+    margin: 7px 0;
+    width: 100%;
+    z-index: 2;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.pagingBox {
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    border: 0.4px solid #d3d3d350;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: row;
+}
+
+.prevBtn, .nextBtn {
+    text-align: center;
+    border: none;
+    width: 50px;
+    background-color: none;
+}
+
+.input {
+    border: none;
+    outline: none;
+}
+.pagingContainer i {
+    cursor: pointer;
+}
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.createdDate {
+    width: 150px;
+}
+
+.table td, .table th  {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 280px;
+}
+
+.noties {
+    margin-left: 20px;
+}
+.write {
+    background-color: rgb(240, 226, 226);
+    cursor: pointer;
+}

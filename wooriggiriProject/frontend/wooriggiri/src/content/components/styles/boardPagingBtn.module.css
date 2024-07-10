@@ -1,0 +1,36 @@
+.container {
+    margin: 7px 0;
+    width: 100%;
+    z-index: 2;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.box {
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    border: 0.4px solid #d3d3d350;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: row;
+}
+
+.prevBtn, .nextBtn {
+    text-align: center;
+    border: none;
+    width: 50px;
+    background-color: none;
+}
+
+.input {
+    border: none;
+    outline: none;
+}
+.container i {
+    cursor: pointer;
+}
+
+

@@ -1,6 +1,5 @@
 package com.wooriggiri.app.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.wooriggiri.app.domain.BoardItemDTO;
 import com.wooriggiri.app.domain.BoardListDTO;
 import com.wooriggiri.app.domain.ResponsDTO;
+import com.wooriggiri.app.domain.UserDetailResponsDTO;
 import com.wooriggiri.app.service.AppService;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,14 +25,27 @@ public class AppController {
     @Autowired
     private AppService appService;
 
-    @GetMapping("/communityposts")
-    public ResponseEntity<?> communityPosts(@RequestParam int page, @RequestParam String communityname) {
-        try {
-            ResponsDTO response = appService.searchBoardByCommunityName(page, communityname);
+    @GetMapping("/userdetail")
+    public ResponseEntity<?> userDetail(@RequestParam String username) {
+        UserDetailResponsDTO response = appService.searchUserDetail(username);
+        return ResponseEntity.ok().body(response);
+    }
+
+    @GetMapping("/noties")
+    public ResponseEntity<?> notiesPosts(@RequestParam(name="page", required=false, defaultValue="1") int page,
+                                            @RequestParam(name="title", required=false, defaultValue="") String title,
+                                            @RequestParam(name="username", required=false, defaultValue="") String username) {
+            ResponsDTO response = appService.searchNoties(page, title, username);
             return ResponseEntity.ok().body(response);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Get failed");
-        }
+    }
+
+    @GetMapping("/communityposts")
+    public ResponseEntity<?> communityPosts(@RequestParam(name="page", required=false, defaultValue="1") int page,
+                                            @RequestParam String boardname, 
+                                            @RequestParam(name="title", required=false, defaultValue="") String title,
+                                            @RequestParam(name="username", required=false, defaultValue="") String username) {
+            ResponsDTO response = appService.searchBoardByCommunityName(page, boardname, title, username);
+            return ResponseEntity.ok().body(response);
     }
 
     @GetMapping("/postdetail")
@@ -47,8 +60,12 @@ public class AppController {
     
     @GetMapping("/comment")
     public ResponseEntity<?> comment(@RequestParam int postId) {
-        ResponsDTO response = appService.searchComment(postId);
-        return ResponseEntity.ok().body(response);
+        try {
+            ResponsDTO response = appService.searchComment(postId);
+            return ResponseEntity.ok().body(response);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Get failed");
+        }
     }
     
     @GetMapping("/notiesposts")

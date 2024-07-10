@@ -1,18 +1,11 @@
 package com.wooriggiri.app.util;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.annotation.PostConstruct;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-
-import com.wooriggiri.app.service.UserService;
 
 import java.util.Date;
 import java.util.function.Function;
@@ -22,8 +15,6 @@ import javax.crypto.spec.SecretKeySpec;
 
 @Component
 public class JwtUtil {
-    @Autowired
-    private UserService userService;
 
     @Value("${jwt.secret}")
     private String secret;

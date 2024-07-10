@@ -11,12 +11,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CommentDTO {
     private Long commentId;
+    private Long postId;
     private int commentType;
+    private String boardname;
     private String username;
     private String content;
     private Long parentCommentId;
-    private int orderNumber;
-    private int depth;
     private LocalDateTime createdDate;
     private LocalDateTime updatedDate;
 }

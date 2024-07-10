@@ -23,6 +23,4 @@ public class Comment extends Datetime{
     private Long userId;
     private String content;
     private Long parentCommentId;
-    private int orderNumber;
-    private int depth;
 }

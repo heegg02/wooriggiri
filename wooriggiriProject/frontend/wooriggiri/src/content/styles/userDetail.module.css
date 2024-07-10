@@ -1,0 +1,61 @@
+.container {
+    display: flex;
+    padding: 30px;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+.box {
+    max-width: 750px;
+    gap: 10px;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    border: 0.4px solid #d3d3d350;
+}
+.header {
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    margin-bottom: 15px;
+    padding: 15px;
+    align-items: center;
+}
+.content {
+    padding: 10px;
+}
+.btncontainer {
+    display: flex;
+    gap: 5px;
+    z-index: 50;
+}
+.postBtn, .commentBtn, .myBoardBtn, .favoriteBoardBtn {
+    padding: 5px 8px 0 8px;
+    background-color: rgb(221, 221, 221);
+    border-radius: 10px 10px 0 0;
+    border: 0.4px solid #d3d3d350;
+}
+.postBtn.select, .commentBtn.select, .myBoardBtn.select, .favoriteBoardBtn.select {
+    background-color: rgb(255, 255, 255);
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.createdDate {
+    width: 150px;
+}
+
+.nowrap {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 350px;
+}

@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    padding: auto;
+    justify-content: space-between;
+}
+
+.btnBox {
+    cursor: pointer;
+    font-size: 13px;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.btnBox a, .btnBox div{
+    border-radius: 10px;
+}
+.btnBox a:hover, .btnBox div:hover {
+    background-color: rgb(175, 175, 175);
+}

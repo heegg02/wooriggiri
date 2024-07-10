@@ -1,0 +1,78 @@
+.box {
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    border: 0.4px solid #d3d3d350;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    width: 350px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.comment {
+    display: flex;
+    flex-direction: column;
+}
+.content {
+    word-break:break-all;
+}
+.comment .box {
+    margin-bottom: 10px;
+}
+
+.commentInfo {
+    display: flex;
+    justify-content: space-between;
+}
+
+.createdDate {
+    font-size: 13px;
+}
+
+.mg20 {
+    margin-left: 40px;
+}
+
+.mg20 .box {
+    width: 300px;
+    font-size: 14px;
+    padding: 8px;
+}
+.mg20 .cretedDate {
+    font-size: 11px;
+}
+.firstComment {
+    padding-bottom: 10px;
+}
+
+.firstComment .box{
+    background-color: rgb(190, 189, 189);
+}
+.childBtn {
+    display: flex;
+    justify-content: right;
+    cursor: pointer;
+}
+.childBtn i{
+    font-size: 20px;
+}
+.childBtn i:hover{
+    background-color: rgb(204, 204, 204);
+}
+
+.textarea {
+    width: 100%;
+    border: 1px solid rgb(156, 156, 156);
+    resize: none;
+}
+.childCommentForm button {
+    border: none;
+    transition: 0.2s ease;
+    border-radius: 300px;
+}
+.childCommentForm button:hover {
+    background-color: rgb(180, 180, 180);
+}
