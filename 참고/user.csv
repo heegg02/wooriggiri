@@ -1,0 +1,10 @@
+"id","user_type","username","password","created_date","updated_date"
+"1","2","12345","$2a$10$vgyjILezxw..W1ly/sQk0.sR2tqNV6cFoOZUvBQVhJZyMrz0wVjIm","26/6/2024 12:03:34",
+"2","1","123456","$2a$10$C5qTQYePGefhj39uuS/fFeua2F1XrjhGAuxk8kwqoEfZ1PZBUqZjG","26/6/2024 12:14:24",
+"3","1","aaaaa","$2a$10$Zb1TurXWKaqjwr8hqFCG9O1eNwfHaytiIKeISd333xOXqOCyv8aI6","28/6/2024 13:26:18",
+"4","1","qqqqq","$2a$10$4O1.xggWnu79KudJaxhJzOFl.YlTB4QALeXcZSIxz7DBZsl/QKAoC","28/6/2024 13:29:21",
+"5","1","123457","$2a$10$DuI/EvtY1DZrfxnbbIeDeeQC6JDzr0W2H/UKD.bru8Dx4u7yFwyFi","29/6/2024 16:32:57",
+"6","1","1234111","$2a$10$ktP.ykL1vIqsjJtGwUGnjeaeqb58xMwY.fcIaFlLX7pOzBCDr9HB6","29/6/2024 16:36:56",
+"7","1","1234568","$2a$10$xkmvIg1CTpN3lsDg1GCMvOEAGAkRPjqgxkZgCXV4OHmjRZ8xFrfGK","29/6/2024 21:32:53",
+"101","1","12345688","$2a$10$eHvlfbShYMQfzqNMr93xu.i7VT0nto4zAspPffSp/aEnuE1RwNMg.","4/7/2024 19:44:50",
+"102","1","123455555","$2a$10$/OF7cVjfntfu.dal0R0pzuCy3PWAJ6M03FUCPKgM8zRPxu0sW.8oy","5/7/2024 11:06:03",

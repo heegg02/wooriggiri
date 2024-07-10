@@ -139,13 +139,13 @@ function Community() {
                             {data.metadata.updatedDate}
                         </div>
                     </div>
-                    <div className={`${styles.flexMenu}`}>
+                    {loginStatus && <div className={`${styles.flexMenu}`}>
                         <i onClick={openModal} className={`${styles.writePost} bi bi-pencil-square`} />
-                    </div>                
+                    </div>  }              
                 </div>
-                <div className={`${styles.gridMenu}`}>
+                {loginStatus && <div className={`${styles.gridMenu}`}>
                     <i onClick={openModal} className={`${styles.writePost} bi bi-pencil-square`} />
-                </div>
+                </div>}
             </div> 
             <div className={`${styles.boardContainer}`}>
                 {data == null || data.result.length === 0 ? <div className={`${styles.nullData} ${styles.box}`}>게시글이 없습니다.</div> :<PostRow post={data} />}
